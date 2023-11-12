@@ -688,7 +688,7 @@
         "type": "mongodb-config",
         "hostname": "127.0.0.1",
         "port": "27017",
-        "db": "TestDB",
+        "db": "AD_Port_Demo",
         "name": "MongoDB"
     },
     {
@@ -1683,6 +1683,7 @@
         "id": "74070f8e907dc874",
         "type": "ui_button",
         "z": "484f7e34439765a5",
+        "d": true,
         "name": "",
         "group": "92a9cd27.99b9d",
         "order": 0,
@@ -1713,6 +1714,7 @@
         "id": "4f73525b0bc29d02",
         "type": "debug",
         "z": "484f7e34439765a5",
+        "d": true,
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -1729,6 +1731,7 @@
         "id": "49cea8c1effe9a1d",
         "type": "ui_audio",
         "z": "484f7e34439765a5",
+        "d": true,
         "name": "",
         "group": "92a9cd27.99b9d",
         "voice": "",
@@ -1741,6 +1744,7 @@
         "id": "f2acbb829ab98de8",
         "type": "ui_text",
         "z": "484f7e34439765a5",
+        "d": true,
         "group": "92a9cd27.99b9d",
         "order": 1,
         "width": 0,
@@ -1783,6 +1787,7 @@
         "id": "3ef3aa94ead77582",
         "type": "ui_toast",
         "z": "484f7e34439765a5",
+        "d": true,
         "position": "top right",
         "displayTime": "3",
         "highlight": "",
@@ -2498,6 +2503,7 @@
         "id": "b9540d1dbf5d2fd0",
         "type": "comment",
         "z": "484f7e34439765a5",
+        "d": true,
         "name": "Home Tab Work",
         "info": "",
         "x": 320,
@@ -4565,6 +4571,69 @@
         ]
     },
     {
+        "id": "04b0fe21ed5ad9c0",
+        "type": "debug",
+        "z": "7d21f6a3794af32c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 550,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "c3dc0e3d79891e77",
+        "type": "inject",
+        "z": "7d21f6a3794af32c",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Select * From UAE_Virgin_SOH;",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1060,
+        "wires": [
+            [
+                "2e5cede2a141eb46",
+                "04b0fe21ed5ad9c0"
+            ]
+        ]
+    },
+    {
+        "id": "2e5cede2a141eb46",
+        "type": "sqlite",
+        "z": "7d21f6a3794af32c",
+        "mydb": "7b8f6438.90b4fc",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "Master",
+        "x": 350,
+        "y": 1060,
+        "wires": [
+            [
+                "04b0fe21ed5ad9c0"
+            ]
+        ]
+    },
+    {
         "id": "384fc25fb5aac458",
         "type": "inject",
         "z": "d855af0dc63d7647",
@@ -5515,6 +5584,7 @@
         "id": "0b4e579503015b40",
         "type": "http in",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "url": "/get/asn",
         "method": "get",
@@ -5532,6 +5602,7 @@
         "id": "4f1d24a385ce3e3a",
         "type": "function",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "func": "msg.topic=\"Select RECEIPTDATE, RECEIPTKEY, SUPPLIERNAME From ASN_HEADER_RECEIPT;\";\nreturn msg;",
         "outputs": 1,
@@ -5551,6 +5622,7 @@
         "id": "fc32808d2cb5d856",
         "type": "http response",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -5562,6 +5634,7 @@
         "id": "1427cede2fa5b207",
         "type": "debug",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -5579,6 +5652,7 @@
         "id": "3ac4639983741241",
         "type": "http in",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "url": "/get/sku/detail",
         "method": "get",
@@ -5596,6 +5670,7 @@
         "id": "46044e7e3b2c6a0c",
         "type": "function",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "func": "msg.topic=\"Select * From ASN_DETAILS_RECEIPTDETAIL where RECEIPTKEY = '0000103670';\";\nreturn msg;",
         "outputs": 1,
@@ -5615,6 +5690,7 @@
         "id": "2ac45b83770bbc79",
         "type": "http response",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -5626,6 +5702,7 @@
         "id": "f0c23ae68d6c4332",
         "type": "debug",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "active": true,
         "tosidebar": true,
@@ -5643,6 +5720,7 @@
         "id": "1e8ae45be4f783eb",
         "type": "http in",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "url": "/get/asn/sku",
         "method": "get",
@@ -5660,6 +5738,7 @@
         "id": "a4a930b62b262ebe",
         "type": "function",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "func": "msg.topic=\"Select ALTSKU, UOM, QTYEXPECTED, QTYRECEIVED From ASN_DETAILS_RECEIPTDETAIL where SKU = '0000162006'\";\nreturn msg;",
         "outputs": 1,
@@ -5679,6 +5758,7 @@
         "id": "10cf5961110e245f",
         "type": "http response",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -5690,6 +5770,7 @@
         "id": "35c1fb22ee028c0e",
         "type": "http in",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "url": "/post/lpn",
         "method": "get",
@@ -5707,6 +5788,7 @@
         "id": "1cc40ed2baca81a4",
         "type": "function",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "func": "msg.topic=\"insert into PICKING_DETAILS_PICKDETAIL(LOC, REFID )Values('PICKTO', '12')\"\n\"insert into ASN_DETAILS_RECEIPTDETAIL(LOTTABLE05, LOTTABLE03 )Values('01/Sep/2026 11:00:00 AM', '5673')\"\n\"insert into ITEM_MASTER_DETAILS(DESCR)Values('burnshield burn dressing')\";\nreturn msg;",
         "outputs": 1,
@@ -5726,6 +5808,7 @@
         "id": "c751d2264255f517",
         "type": "http response",
         "z": "f7d9e8689641f632",
+        "d": true,
         "name": "",
         "statusCode": "",
         "headers": {},
@@ -5737,6 +5820,7 @@
         "id": "7db5a365a3ed847a",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5754,6 +5838,7 @@
         "id": "555bccdcbda8b3d7",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5771,6 +5856,7 @@
         "id": "3be0a2c543957e74",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5788,6 +5874,7 @@
         "id": "86f957c8c3ba7a9f",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5805,6 +5892,7 @@
         "id": "eef5a7f88216318f",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5822,6 +5910,7 @@
         "id": "53caeb2e1e889449",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5839,6 +5928,7 @@
         "id": "a6c9229a66ee336a",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5856,6 +5946,7 @@
         "id": "6ab403ad2b96cb74",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5873,6 +5964,7 @@
         "id": "c9017f3a6e558020",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5890,6 +5982,7 @@
         "id": "4ea23f116fb51700",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5907,6 +6000,7 @@
         "id": "8e2c7ee9b046b604",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5924,6 +6018,7 @@
         "id": "03429ba70b060b85",
         "type": "sqlite",
         "z": "f7d9e8689641f632",
+        "d": true,
         "mydb": "82664b308449f318",
         "sqlquery": "msg.topic",
         "sql": "",
@@ -5943,12 +6038,12 @@
         "z": "f7d9e8689641f632",
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
-        "collection": "node-redDB",
-        "operation": "find",
+        "collection": "AD_Port",
+        "operation": "insert",
         "upsert": false,
         "multi": false,
-        "x": 380,
-        "y": 1820,
+        "x": 560,
+        "y": 1860,
         "wires": [
             [
                 "08e95244e0cbd9f8"
@@ -5974,13 +6069,13 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 200,
+        "payload": "operationType === 'insert'",
+        "payloadType": "str",
+        "x": 130,
         "y": 1860,
         "wires": [
             [
-                "42a721f0aba9bbf8"
+                "a28572ab3156e62a"
             ]
         ]
     },
@@ -5996,8 +6091,436 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 580,
-        "y": 1880,
+        "x": 780,
+        "y": 1860,
+        "wires": []
+    },
+    {
+        "id": "a28572ab3156e62a",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "var data = msg.payload;\nvar operationType = data;\nif (operationType === 'insert') {\n  var msgData = {};\n  msgData.collection = 'AD_Port'; // Corrected the typo 'colection' to 'collection'\n  msgData.payload = { 'name': 'Nadeem', 'age': '23' }; // Corrected the data assignment and object structure\n\n  var alertMessage = 'New record inserted:\\n' + JSON.stringify(msgData.payload);\n\n  // You can customize this part to send alerts via other means, e.g., email, push notification, or any other mechanism.\n  // For demonstration, we're just logging the alert.\n  node.warn(alertMessage);\n\n  return msgData;\n}\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1860,
+        "wires": [
+            [
+                "42a721f0aba9bbf8",
+                "4043f1e94d621d06"
+            ]
+        ]
+    },
+    {
+        "id": "5106dab008af45cf",
+        "type": "comment",
+        "z": "f7d9e8689641f632",
+        "name": "Crud Operation",
+        "info": "",
+        "x": 120,
+        "y": 1780,
+        "wires": []
+    },
+    {
+        "id": "01de3d5fb3a8ba86",
+        "type": "comment",
+        "z": "f7d9e8689641f632",
+        "name": "Insert",
+        "info": "",
+        "x": 550,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "4198b3c30cc1485f",
+        "type": "mongodb-node",
+        "z": "f7d9e8689641f632",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 560,
+        "y": 2260,
+        "wires": [
+            [
+                "fa216bdf378f3a04"
+            ]
+        ]
+    },
+    {
+        "id": "412c25126e21422d",
+        "type": "inject",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 2260,
+        "wires": [
+            [
+                "6c9306c9c09e7f3e"
+            ]
+        ]
+    },
+    {
+        "id": "fa216bdf378f3a04",
+        "type": "debug",
+        "z": "f7d9e8689641f632",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "6c9306c9c09e7f3e",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 2260,
+        "wires": [
+            [
+                "4198b3c30cc1485f"
+            ]
+        ]
+    },
+    {
+        "id": "87c8ab721a840eec",
+        "type": "comment",
+        "z": "f7d9e8689641f632",
+        "name": "Read",
+        "info": "",
+        "x": 550,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "0c09a4d990d90431",
+        "type": "mongodb-node",
+        "z": "f7d9e8689641f632",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "update",
+        "upsert": false,
+        "multi": false,
+        "x": 560,
+        "y": 2360,
+        "wires": [
+            [
+                "9500d28b807d198a"
+            ]
+        ]
+    },
+    {
+        "id": "f86bddd5eecde958",
+        "type": "inject",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 2360,
+        "wires": [
+            [
+                "8a53da8f684dcb97"
+            ]
+        ]
+    },
+    {
+        "id": "9500d28b807d198a",
+        "type": "debug",
+        "z": "f7d9e8689641f632",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "8a53da8f684dcb97",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nmsgData.query = {\"_id\": \"\"};\nmsgData.payload = {'$set' :{ 'name': 'Nadeem', 'age': '25' }};\nreturn msgData;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 2360,
+        "wires": [
+            [
+                "0c09a4d990d90431"
+            ]
+        ]
+    },
+    {
+        "id": "ad7ee5c21e27e2d3",
+        "type": "comment",
+        "z": "f7d9e8689641f632",
+        "name": "Update",
+        "info": "",
+        "x": 550,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "45608de6836aaa98",
+        "type": "mongodb-node",
+        "z": "f7d9e8689641f632",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "delete",
+        "upsert": false,
+        "multi": false,
+        "x": 560,
+        "y": 2460,
+        "wires": [
+            [
+                "cc01dfcffa7118c7"
+            ]
+        ]
+    },
+    {
+        "id": "5b5fa3082a8e859c",
+        "type": "inject",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 2460,
+        "wires": [
+            [
+                "300a7dfcd5029f10"
+            ]
+        ]
+    },
+    {
+        "id": "cc01dfcffa7118c7",
+        "type": "debug",
+        "z": "f7d9e8689641f632",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 2460,
+        "wires": []
+    },
+    {
+        "id": "300a7dfcd5029f10",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nreturn msgData;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 2460,
+        "wires": [
+            [
+                "45608de6836aaa98"
+            ]
+        ]
+    },
+    {
+        "id": "5193a1fe87831663",
+        "type": "comment",
+        "z": "f7d9e8689641f632",
+        "name": "Delete",
+        "info": "",
+        "x": 550,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "b385b10b6319370f",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nmsg.payload = {'name':'Nadeem', 'age':'23'};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 342.33331298828125,
+        "y": 1812.666748046875,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1821a0d73da14124",
+        "type": "ui_button",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "group": "92a9cd27.99b9d",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "button",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "insert",
+        "payloadType": "str",
+        "topic": "topic",
+        "topicType": "msg",
+        "x": 430,
+        "y": 2000,
+        "wires": [
+            [
+                "d2f1610f4166d399",
+                "176c6efee0e3c86c",
+                "9da04cd89e327bc8",
+                "a28572ab3156e62a"
+            ]
+        ]
+    },
+    {
+        "id": "d2f1610f4166d399",
+        "type": "debug",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 2000,
+        "wires": []
+    },
+    {
+        "id": "176c6efee0e3c86c",
+        "type": "ui_audio",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "group": "92a9cd27.99b9d",
+        "voice": "",
+        "always": "",
+        "x": 780,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "9da04cd89e327bc8",
+        "type": "ui_text",
+        "z": "f7d9e8689641f632",
+        "group": "92a9cd27.99b9d",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "x": 770,
+        "y": 1960,
+        "wires": []
+    },
+    {
+        "id": "4043f1e94d621d06",
+        "type": "ui_toast",
+        "z": "f7d9e8689641f632",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "topic": "",
+        "name": "",
+        "x": 810,
+        "y": 2040,
         "wires": []
     },
     {
@@ -12215,6 +12738,7 @@
         "id": "11d2197b037a62ad",
         "type": "inject",
         "z": "9dda84db99f66cba",
+        "d": true,
         "name": "",
         "props": [
             {
