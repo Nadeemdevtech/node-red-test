@@ -13417,7 +13417,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nlet asnRecords = {};\nasnRecords.colection = 'AD_Port';\nmsg.msgData = msgData;\nreturn msg;",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nlet asnRecords = {};\nasnRecords.colection = 'asns';\nmsg.asnRecords = asnRecords;\nmsg.receivingRecord = msgData;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
