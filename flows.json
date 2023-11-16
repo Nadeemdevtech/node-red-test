@@ -13367,7 +13367,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+msgData);\nreturn msg;",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -13377,7 +13377,6 @@
         "y": 200,
         "wires": [
             [
-                "269d58b0fa604b4d",
                 "5dcfea80ae5c8121"
             ]
         ]
@@ -13400,22 +13399,6 @@
         ]
     },
     {
-        "id": "269d58b0fa604b4d",
-        "type": "debug",
-        "z": "ceb078855481dd99",
-        "name": "debug 13",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 580,
-        "y": 300,
-        "wires": []
-    },
-    {
         "id": "5dcfea80ae5c8121",
         "type": "http response",
         "z": "ceb078855481dd99",
@@ -13423,7 +13406,7 @@
         "statusCode": "",
         "headers": {},
         "x": 510,
-        "y": 180,
+        "y": 260,
         "wires": []
     }
 ]
