@@ -13543,7 +13543,7 @@
         "configNode": "90b9e886c74f7cb0",
         "name": "mongoDB",
         "collection": "asns",
-        "operation": "find.forEach",
+        "operation": "find.toArray",
         "x": 500,
         "y": 140,
         "wires": [
