@@ -13512,7 +13512,7 @@
         "y": 240,
         "wires": [
             [
-                "013ad07b3746862f"
+                "0dc715416cb8fd3f"
             ]
         ]
     },
@@ -13544,10 +13544,12 @@
         "name": "mongoDB",
         "collection": "asns",
         "operation": "find.forEach",
-        "x": 480,
-        "y": 120,
+        "x": 500,
+        "y": 140,
         "wires": [
-            []
+            [
+                "f13dcd3188c905b8"
+            ]
         ]
     }
 ]
