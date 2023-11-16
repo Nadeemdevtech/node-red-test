@@ -13417,7 +13417,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nlet asnRecords = {};\nasnRecords.colection = 'asns';\nmsg.asnRecords = asnRecords;\nmsg.receivingRecord = msgData;\nreturn msg;",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\n// let asnRecords = {};\n// asnRecords.colection = 'asns';\n// msg.asnRecords = asnRecords;\nmsg.receivingRecord = msgData;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -13427,7 +13427,7 @@
         "y": 180,
         "wires": [
             [
-                "4727599daa75f551"
+                "013ad07b3746862f"
             ]
         ]
     },
@@ -13458,10 +13458,12 @@
         "operation": "find",
         "upsert": false,
         "multi": false,
-        "x": 520,
-        "y": 100,
+        "x": 500,
+        "y": 180,
         "wires": [
-            []
+            [
+                "644066af9a4dfc90"
+            ]
         ]
     },
     {
@@ -13491,12 +13493,10 @@
         "name": "MongoDb",
         "collection": "asns",
         "operation": "find",
-        "x": 520,
-        "y": 180,
+        "x": 500,
+        "y": 260,
         "wires": [
-            [
-                "644066af9a4dfc90"
-            ]
+            []
         ]
     }
 ]
