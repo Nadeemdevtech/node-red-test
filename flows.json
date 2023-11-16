@@ -759,7 +759,7 @@
         "id": "89bb548239426793",
         "type": "MySQLdatabase",
         "name": "",
-        "host": "mysql",
+        "host": "localhost",
         "port": "3306",
         "db": "virgin_main",
         "tz": "",
