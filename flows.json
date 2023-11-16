@@ -13462,7 +13462,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "validate ASN",
-        "func": "let msgData1 = msg.receivingRecord;\nlet asnData = msg.payload;\nnode.warn('msgData1.asn:'+msgData1.asn);\nnode.warn('asnData.asn:'+JSON.stringify(asnData));\nif (typeof msgData1 !== 'object') {\n    msgData1 = Object(msgData1);\n}\n// Check if 'asn' in msgData1 is equal to 'asn' in asnData\nif (msgData1.asn === asnData.asn) {\n    // If they match, retrieve 'createdAt' from asnData and assign it to msgData1\n    let created = asnData.createdAt;\n    node.warn(\"my warning\" + JSON.stringify(asnData.createdAt));\n}\n\n// You can return msg if needed, but the modifications are made in place\nreturn msg;\n",
+        "func": "let msgData1 = msg.receivingRecord;\nlet asnData = msg.payload;\nnode.warn('msgData1.asn:'+msgData1.asn);\nnode.warn('asnData.asn:'+JSON.stringify(asnData));\nlet msgData1Array = [msgData1];\n\n// Check if 'asn' in msgData1 is equal to 'asn' in asnData\nif (msgData1Array[0].asn === asnData.asn) {\n    // If they match, retrieve 'createdAt' from asnData and assign it to msgData1\n    let created = asnData.createdAt;\n    node.warn(\"my warning\" + JSON.stringify(asnData.createdAt));\n}\n\n// You can return msg if needed, but the modifications are made in place\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
