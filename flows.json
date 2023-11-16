@@ -11,7 +11,7 @@
         "id": "484f7e34439765a5",
         "type": "tab",
         "label": "Dashboard",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -35,7 +35,7 @@
         "id": "7d21f6a3794af32c",
         "type": "tab",
         "label": "Master Ingestion",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -51,7 +51,7 @@
         "id": "f7d9e8689641f632",
         "type": "tab",
         "label": "WMS Integration ",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -83,35 +83,35 @@
         "id": "302faf26d346ae52",
         "type": "tab",
         "label": "[RUBA] SOH",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
         "id": "fd0452957f4a0322",
         "type": "tab",
         "label": "[RUBA] GOODS IN",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
         "id": "9cf062cd8fdccf3c",
         "type": "tab",
         "label": "[RUBA] COUNTED Items",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
         "id": "f56f2cf481d749b9",
         "type": "tab",
         "label": "[RUBA] PRINTING",
-        "disabled": false,
+        "disabled": true,
         "info": ""
     },
     {
         "id": "d64197e1a7365a2a",
         "type": "tab",
         "label": "[RUBA] SUPPLY CHAIN Validator",
-        "disabled": false,
+        "disabled": true,
         "info": "Virgit to Rubaiyat",
         "env": []
     },
@@ -119,7 +119,7 @@
         "id": "155c727e74cb3361",
         "type": "tab",
         "label": "MongoDB Connection ",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -127,7 +127,7 @@
         "id": "9dda84db99f66cba",
         "type": "tab",
         "label": "Flow 12",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
@@ -135,7 +135,7 @@
         "id": "fa9ca0946da23687",
         "type": "tab",
         "label": "Flow 1",
-        "disabled": false,
+        "disabled": true,
         "info": "",
         "env": []
     },
