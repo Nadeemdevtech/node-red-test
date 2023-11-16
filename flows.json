@@ -13413,25 +13413,6 @@
         "wires": []
     },
     {
-        "id": "38bd0a6a4f9fc0b9",
-        "type": "function",
-        "z": "ceb078855481dd99",
-        "name": "Get ASN's",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\n// let asnRecords = {};\n// asnRecords.colection = 'asns';\n// msg.asnRecords = asnRecords;\nmsg.receivingRecord = msgData;\nmsg.topic = '';\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 330,
-        "y": 180,
-        "wires": [
-            [
-                "013ad07b3746862f"
-            ]
-        ]
-    },
-    {
         "id": "a962852f5cb43a65",
         "type": "http in",
         "z": "ceb078855481dd99",
@@ -13444,7 +13425,7 @@
         "y": 180,
         "wires": [
             [
-                "38bd0a6a4f9fc0b9"
+                "013ad07b3746862f"
             ]
         ]
     },
