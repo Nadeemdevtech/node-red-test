@@ -13470,7 +13470,9 @@
         "x": 690,
         "y": 180,
         "wires": [
-            []
+            [
+                "f13dcd3188c905b8"
+            ]
         ]
     },
     {
@@ -13511,9 +13513,7 @@
         "x": 340,
         "y": 240,
         "wires": [
-            [
-                "0dc715416cb8fd3f"
-            ]
+            []
         ]
     },
     {
@@ -13532,23 +13532,6 @@
         "wires": [
             [
                 "013ad07b3746862f"
-            ]
-        ]
-    },
-    {
-        "id": "0dc715416cb8fd3f",
-        "type": "mongodb2 in",
-        "z": "ceb078855481dd99",
-        "service": "_ext_",
-        "configNode": "90b9e886c74f7cb0",
-        "name": "mongoDB",
-        "collection": "asns",
-        "operation": "find.toArray",
-        "x": 500,
-        "y": 140,
-        "wires": [
-            [
-                "f13dcd3188c905b8"
             ]
         ]
     }
