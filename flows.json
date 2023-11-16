@@ -13462,7 +13462,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "validate ASN",
-        "func": "let msgData1 = msg.receivingRecord;\nlet asnData = msg.payload;\n\n// Check if msgData1 'asn' field equals asnData 'asn' field\nif (msgData1 && msgData1.asn === asnData.asn) {\n    // If there is a match, set createdAt from asnData to msgData1\n   \n    let created = asnData.createdAt;\n    node.warn(\"my warning\"+created);\n}\n\nreturn msg;\n",
+        "func": "let msgData1 = msg.receivingRecord;\nlet asnData = msg.payload;\n\n// Check if msgData1 'asn' field equals asnData 'asn' field\nif (msgData1.asn === asnData.asn) {\n    // If there is a match, set createdAt from asnData to msgData1\n   \n    let created = asnData.createdAt;\n    node.warn(\"my warning\"+created);\n}\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
