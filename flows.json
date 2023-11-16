@@ -13382,27 +13382,15 @@
         ]
     },
     {
-        "id": "fd4e0cd635042724",
-        "type": "inject",
+        "id": "65e4ae3976e23ee0",
+        "type": "http in",
         "z": "ceb078855481dd99",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 120,
+        "name": "SupplyChain",
+        "url": "/inbound/receiving",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
         "y": 200,
         "wires": [
             [
