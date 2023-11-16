@@ -51,7 +51,7 @@
         "id": "f7d9e8689641f632",
         "type": "tab",
         "label": "WMS Integration ",
-        "disabled": true,
+        "disabled": false,
         "info": "",
         "env": []
     },
@@ -13417,7 +13417,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nmsg._msgData = msgData;\nreturn msg;",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nlet asnRecords = {};\nasnRecords.colection = 'AD_Port';\nmsg.msgData = msgData;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
