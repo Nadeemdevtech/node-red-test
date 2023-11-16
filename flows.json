@@ -13334,8 +13334,8 @@
         "z": "ceb078855481dd99",
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
-        "collection": "asns",
-        "operation": "find",
+        "collection": "AD_Port",
+        "operation": "insert",
         "upsert": false,
         "multi": false,
         "x": 560,
@@ -13376,7 +13376,9 @@
         "x": 360,
         "y": 200,
         "wires": [
-            []
+            [
+                "3266cbcae4079e57"
+            ]
         ]
     },
     {
