@@ -140,6 +140,14 @@
         "env": []
     },
     {
+        "id": "ceb078855481dd99",
+        "type": "tab",
+        "label": "Ad_Port",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "b3edb4d5e13763dc",
         "type": "subflow",
         "name": "Copy Metadata Printing",
@@ -13319,5 +13327,87 @@
         "x": 830,
         "y": 1020,
         "wires": []
+    },
+    {
+        "id": "3266cbcae4079e57",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 560,
+        "y": 180,
+        "wires": [
+            [
+                "3271df138dd62cd0"
+            ]
+        ]
+    },
+    {
+        "id": "3271df138dd62cd0",
+        "type": "debug",
+        "z": "ceb078855481dd99",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 760,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e4fe98311abe2589",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 200,
+        "wires": [
+            [
+                "3266cbcae4079e57"
+            ]
+        ]
+    },
+    {
+        "id": "fd4e0cd635042724",
+        "type": "inject",
+        "z": "ceb078855481dd99",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "e4fe98311abe2589"
+            ]
+        ]
     }
 ]
