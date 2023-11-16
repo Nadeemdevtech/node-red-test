@@ -13397,24 +13397,6 @@
         ]
     },
     {
-        "id": "013ad07b3746862f",
-        "type": "mongodb-node",
-        "z": "ceb078855481dd99",
-        "mongodb": "92ae78283fc2fda1",
-        "name": "MongoDB",
-        "collection": "AD_Port",
-        "operation": "insert",
-        "upsert": false,
-        "multi": false,
-        "x": 580,
-        "y": 180,
-        "wires": [
-            [
-                "f13dcd3188c905b8"
-            ]
-        ]
-    },
-    {
         "id": "f13dcd3188c905b8",
         "type": "debug",
         "z": "ceb078855481dd99",
@@ -13426,7 +13408,7 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 780,
+        "x": 880,
         "y": 180,
         "wires": []
     },
@@ -13434,17 +13416,19 @@
         "id": "38bd0a6a4f9fc0b9",
         "type": "function",
         "z": "ceb078855481dd99",
-        "name": "",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nreturn msg;",
+        "name": "Get ASN's",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nmsg._msgData = msgData;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 380,
+        "x": 330,
         "y": 180,
         "wires": [
-            []
+            [
+                "013ad07b3746862f"
+            ]
         ]
     },
     {
@@ -13461,6 +13445,43 @@
         "wires": [
             [
                 "38bd0a6a4f9fc0b9"
+            ]
+        ]
+    },
+    {
+        "id": "013ad07b3746862f",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 520,
+        "y": 180,
+        "wires": [
+            [
+                "644066af9a4dfc90"
+            ]
+        ]
+    },
+    {
+        "id": "644066af9a4dfc90",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nmsg._msgData = msgData;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 180,
+        "wires": [
+            [
+                "f13dcd3188c905b8"
             ]
         ]
     }
