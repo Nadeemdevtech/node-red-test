@@ -751,7 +751,7 @@
         "id": "211349b719a1d604",
         "type": "mongodb",
         "hostname": "139.59.68.19",
-        "port": "2701777",
+        "port": "27017",
         "db": "ADPKLP21?authSource=admin",
         "name": "Mongodb"
     },
