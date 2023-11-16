@@ -13367,7 +13367,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "",
-        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nreturn msg;",
+        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+msgData);\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -13377,7 +13377,7 @@
         "y": 200,
         "wires": [
             [
-                "3266cbcae4079e57"
+                "269d58b0fa604b4d"
             ]
         ]
     },
@@ -13397,5 +13397,21 @@
                 "e4fe98311abe2589"
             ]
         ]
+    },
+    {
+        "id": "269d58b0fa604b4d",
+        "type": "debug",
+        "z": "ceb078855481dd99",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 300,
+        "wires": []
     }
 ]
