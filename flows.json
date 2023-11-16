@@ -13461,7 +13461,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let msgData = msg.msgData;\nlet asnData = msg.payload;\nnode.warn(\"my warning\" + JSON.stringify(msg.payload));\nreturn msg;",
+        "func": "let msgData = msg.msgData;\nlet asnData = msg.payload;\nnode.warn(\"my warning\" + JSON.stringify(asnData));\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
