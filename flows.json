@@ -13462,7 +13462,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "validate ASN",
-        "func": "// Assuming msgData and asnData are objects\nlet msgData = msg.receivingRecord;\nlet asnData = msg.payload;\nif (msgData.asn === asnData.asn) {\n        //let createdAtValue = asnData.createdAt;\n\n        // Log the 'createdAt' value for debugging\n    node.warn('11111' + JSON.stringify(asnData.createdAt));\n\n        // You can do further processing with the 'createdAt' value if needed\n\n        // Attach the 'createdAt' value to the message object\n       // msg.createdAt = createdAtValue;\n    \n} else {\n    // Log a warning if 'asn' values are not equal\n    node.warn(\"asn values are not equal\");\n}\n\n// Return the modified message\nreturn msg;\n",
+        "func": "// Assuming msgData and asnData are objects\nlet msgData = msg.receivingRecord;\nlet asnData = {};\nasnData = msg.payload;\nif (msgData.asn === asnData.asn) {\n        let createdAtValue = asnData.createdAt;\n\n        // Log the 'createdAt' value for debugging\n    node.warn('11111' + JSON.stringify(asnData.createdAt));\n\n        // You can do further processing with the 'createdAt' value if needed\n\n        // Attach the 'createdAt' value to the message object\n       // msg.createdAt = createdAtValue;\n    \n} else {\n    // Log a warning if 'asn' values are not equal\n    node.warn(\"asn values are not equal\");\n}\n\n// Return the modified message\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
