@@ -13427,7 +13427,7 @@
         "z": "ceb078855481dd99",
         "name": "ASN",
         "url": "/asn_alert",
-        "method": "get",
+        "method": "post",
         "upload": false,
         "swaggerDoc": "",
         "x": 170,
