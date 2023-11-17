@@ -13553,7 +13553,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\nmsg.payload = { 'movedLocation': newLocation };\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
+        "func": "let lpnRecords = msg.payload;\nlet previousLocation = lpnRecords.binLocation;\nmsg.payload = { 'movedLocation': previousLocation };\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
