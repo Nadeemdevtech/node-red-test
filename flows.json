@@ -13539,7 +13539,7 @@
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
         "collection": "lpns",
-        "operation": "store",
+        "operation": "update",
         "upsert": false,
         "multi": false,
         "x": 440,
@@ -13657,18 +13657,53 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\n\n// Construct the update query using $set\nlet updateData = {\n    set: {\n        LPN: lpnRecords.LPN,\n        binLocation: lpnRecords.binLocation,\n        comment: lpnRecords.comment,\n        movedLocation: lpnRecords.movedLocation,\n        movement: lpnRecords.movement,\n        operation: lpnRecords.operation,\n        userId: lpnRecords.userId\n    }\n};\n\n// Assuming you want to update the document based on the _id field\nlet query = { _id: lpnRecords._id };\n\n// Construct the final update message\nmsg.payload = {\n    query: query,\n    update: updateData\n};\nnode.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
+        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\nlet query = {\n    movedLocation: newLocation\n}\nmsg.topic = query;\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 330,
+        "x": 230,
         "y": 440,
         "wires": [
             [
-                "a0984d6929c72eba"
+                "1f1b217f1057f5c2"
             ]
+        ]
+    },
+    {
+        "id": "1f1b217f1057f5c2",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "lpns",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "c45978f272c38c26"
+            ]
+        ]
+    },
+    {
+        "id": "c45978f272c38c26",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let locationRecords = msg.payload;\nnode.warn(\"my warning\"+locationRecords);\n\n// // Construct the update query using $set\n// let updateData = {\n//     set: {\n//         LPN: lpnRecords.LPN,\n//         binLocation: lpnRecords.binLocation,\n//         comment: lpnRecords.comment,\n//         movedLocation: lpnRecords.movedLocation,\n//         movement: lpnRecords.movement,\n//         operation: lpnRecords.operation,\n//         userId: lpnRecords.userId\n//     }\n// };\n\n// // Assuming you want to update the document based on the _id field\n// let query = { _id: lpnRecords._id };\n\n// // Construct the final update message\n// msg.payload = {\n//     query: query,\n//     update: updateData\n// };\n// node.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 440,
+        "wires": [
+            []
         ]
     }
 ]
