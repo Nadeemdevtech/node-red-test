@@ -13375,12 +13375,12 @@
         "id": "65e4ae3976e23ee0",
         "type": "http in",
         "z": "ceb078855481dd99",
-        "name": "SupplyChain",
+        "name": "Tracking ASN Location",
         "url": "/inbound/receiving",
         "method": "put",
         "upload": false,
         "swaggerDoc": "",
-        "x": 190,
+        "x": 220,
         "y": 380,
         "wires": [
             [
@@ -13408,12 +13408,12 @@
         "id": "a962852f5cb43a65",
         "type": "http in",
         "z": "ceb078855481dd99",
-        "name": "ASN",
+        "name": "Verify ASN",
         "url": "/asn_alert",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 170,
+        "x": 180,
         "y": 180,
         "wires": [
             [
