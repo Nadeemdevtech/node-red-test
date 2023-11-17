@@ -13678,7 +13678,7 @@
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
         "collection": "lpns",
-        "operation": "find",
+        "operation": "count",
         "upsert": false,
         "multi": false,
         "x": 400,
