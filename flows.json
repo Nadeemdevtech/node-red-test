@@ -6073,7 +6073,7 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "payload": "operationType === 'insert'",
+        "payload": "",
         "payloadType": "str",
         "x": 130,
         "y": 1860,
