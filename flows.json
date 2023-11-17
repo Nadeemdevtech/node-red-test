@@ -13367,7 +13367,7 @@
         "method": "put",
         "upload": false,
         "swaggerDoc": "",
-        "x": 220,
+        "x": 180,
         "y": 380,
         "wires": [
             [
@@ -13539,7 +13539,7 @@
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
         "collection": "lpns",
-        "operation": "update",
+        "operation": "store",
         "upsert": false,
         "multi": false,
         "x": 440,
