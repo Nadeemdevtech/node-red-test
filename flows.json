@@ -13553,7 +13553,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nlet previousLocation = lpnRecords.binLocation;\nmsg.payload = { 'movedLocation': previousLocation };\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
+        "func": "let lpnRecords = msg.payload;\n// let previousLocation = lpnRecords.binLocation;\nmsg.payload = {\n        LPN: lpnRecords.LPN,\n        binLocation: lpnRecords.binLocation,\n        comment: lpnRecords.comment,\n        movedLocation: lpnRecords.movedLocation,\n        movement: lpnRecords.movement,\n        operation: lpnRecords.operation,\n        userId: lpnRecords.userId\n    }\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
@@ -13563,7 +13563,7 @@
         "y": 440,
         "wires": [
             [
-                "205e407f67753cdd"
+                "8915283eecac820f"
             ]
         ]
     },
@@ -13582,22 +13582,6 @@
         "y": 440,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "205e407f67753cdd",
-        "type": "mongodb in",
-        "z": "ceb078855481dd99",
-        "mongodb": "211349b719a1d604",
-        "name": "mongodb",
-        "collection": "lpns",
-        "operation": "find",
-        "x": 420,
-        "y": 440,
-        "wires": [
-            [
-                "c45978f272c38c26"
-            ]
         ]
     },
     {
@@ -13699,6 +13683,24 @@
         "wires": [
             [
                 "8224e5b0.b218c"
+            ]
+        ]
+    },
+    {
+        "id": "8915283eecac820f",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "lpns",
+        "operation": "update",
+        "upsert": false,
+        "multi": false,
+        "x": 400,
+        "y": 440,
+        "wires": [
+            [
+                "c45978f272c38c26"
             ]
         ]
     }
