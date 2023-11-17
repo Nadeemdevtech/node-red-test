@@ -13657,7 +13657,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nnode.warn('1111111' + lpnRecords);\nreturn msg;",
+        "func": "let lpnRecords = msg.payload;\nnode.warn('1111111' +JSON.stringify(lpnRecords));\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
