@@ -6055,24 +6055,6 @@
         ]
     },
     {
-        "id": "42a721f0aba9bbf8",
-        "type": "mongodb-node",
-        "z": "f7d9e8689641f632",
-        "mongodb": "92ae78283fc2fda1",
-        "name": "MongoDB",
-        "collection": "AD_Port",
-        "operation": "insert",
-        "upsert": false,
-        "multi": false,
-        "x": 560,
-        "y": 1860,
-        "wires": [
-            [
-                "08e95244e0cbd9f8"
-            ]
-        ]
-    },
-    {
         "id": "9f5cb139930a5a4e",
         "type": "inject",
         "z": "f7d9e8689641f632",
@@ -6097,7 +6079,7 @@
         "y": 1860,
         "wires": [
             [
-                "a28572ab3156e62a"
+                "b385b10b6319370f"
             ]
         ]
     },
@@ -6131,10 +6113,7 @@
         "x": 340,
         "y": 1860,
         "wires": [
-            [
-                "42a721f0aba9bbf8",
-                "4043f1e94d621d06"
-            ]
+            []
         ]
     },
     {
@@ -6448,7 +6427,9 @@
         "x": 342.33331298828125,
         "y": 1812.666748046875,
         "wires": [
-            []
+            [
+                "bce39eaa19dcc8dd"
+            ]
         ]
     },
     {
@@ -6477,8 +6458,7 @@
             [
                 "d2f1610f4166d399",
                 "176c6efee0e3c86c",
-                "9da04cd89e327bc8",
-                "a28572ab3156e62a"
+                "9da04cd89e327bc8"
             ]
         ]
     },
@@ -6544,6 +6524,24 @@
         "x": 810,
         "y": 2040,
         "wires": []
+    },
+    {
+        "id": "bce39eaa19dcc8dd",
+        "type": "mongodb-node",
+        "z": "f7d9e8689641f632",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "AD_Port",
+        "operation": "insert",
+        "upsert": false,
+        "multi": false,
+        "x": 540,
+        "y": 1860,
+        "wires": [
+            [
+                "08e95244e0cbd9f8"
+            ]
+        ]
     },
     {
         "id": "375f5ee3a86614c5",
@@ -13551,6 +13549,95 @@
         ]
     },
     {
+        "id": "1b785c79f2add276",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\n\nlet query = {\n    'movedLocation' : newLocation\n}\nnode.warn(query);\nmsg.topic = query;\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 230,
+        "y": 440,
+        "wires": [
+            [
+                "205e407f67753cdd"
+            ]
+        ]
+    },
+    {
+        "id": "c45978f272c38c26",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let locationRecords = msg.payload;\nnode.warn(\"my warning\");\nnode.warn(locationRecords);\n\n// // Construct the update query using $set\n// let updateData = {\n//     set: {\n//         LPN: lpnRecords.LPN,\n//         binLocation: lpnRecords.binLocation,\n//         comment: lpnRecords.comment,\n//         movedLocation: lpnRecords.movedLocation,\n//         movement: lpnRecords.movement,\n//         operation: lpnRecords.operation,\n//         userId: lpnRecords.userId\n//     }\n// };\n\n// // Assuming you want to update the document based on the _id field\n// let query = { _id: lpnRecords._id };\n\n// // Construct the final update message\n// msg.payload = {\n//     query: query,\n//     update: updateData\n// };\n// node.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "205e407f67753cdd",
+        "type": "mongodb in",
+        "z": "ceb078855481dd99",
+        "mongodb": "211349b719a1d604",
+        "name": "mongodb",
+        "collection": "lpns",
+        "operation": "find",
+        "x": 420,
+        "y": 440,
+        "wires": [
+            [
+                "c45978f272c38c26"
+            ]
+        ]
+    },
+    {
+        "id": "c880550d.2ed6a8",
+        "type": "ui_toast",
+        "z": "ceb078855481dd99",
+        "position": "top-right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1120,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8224e5b0.b218c",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Check and Alert",
+        "func": "// Check if the movedBinlocation has changed\nvar currentLocation = msg.payload.movedBinlocation;\nvar previousLocation = flow.get(\"previousLocation\") || null;\n\nif (currentLocation && currentLocation !== previousLocation) {\n    // If changed, create an alert message\n    var alertMessage = 'ASN is moved to ' + currentLocation + ' location';\n    msg.payload = alertMessage;\n    flow.set(\"previousLocation\", currentLocation);\n    return msg;\n} else {\n    // If not changed, do nothing\n    return null;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 520,
+        "wires": [
+            [
+                "c880550d.2ed6a8"
+            ]
+        ]
+    },
+    {
         "id": "ae83ee32.03129",
         "type": "inject",
         "z": "ceb078855481dd99",
@@ -13612,95 +13699,6 @@
         "wires": [
             [
                 "8224e5b0.b218c"
-            ]
-        ]
-    },
-    {
-        "id": "8224e5b0.b218c",
-        "type": "function",
-        "z": "ceb078855481dd99",
-        "name": "Check and Alert",
-        "func": "// Check if the movedBinlocation has changed\nvar currentLocation = msg.payload.movedBinlocation;\nvar previousLocation = flow.get(\"previousLocation\") || null;\n\nif (currentLocation && currentLocation !== previousLocation) {\n    // If changed, create an alert message\n    var alertMessage = 'ASN is moved to ' + currentLocation + ' location';\n    msg.payload = alertMessage;\n    flow.set(\"previousLocation\", currentLocation);\n    return msg;\n} else {\n    // If not changed, do nothing\n    return null;\n}",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 880,
-        "y": 520,
-        "wires": [
-            [
-                "c880550d.2ed6a8"
-            ]
-        ]
-    },
-    {
-        "id": "c880550d.2ed6a8",
-        "type": "ui_toast",
-        "z": "ceb078855481dd99",
-        "position": "top-right",
-        "displayTime": "3",
-        "highlight": "",
-        "outputs": 1,
-        "ok": "OK",
-        "cancel": "",
-        "topic": "",
-        "name": "",
-        "x": 1120,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "1b785c79f2add276",
-        "type": "function",
-        "z": "ceb078855481dd99",
-        "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\n\nlet query = {\n    'movedLocation' : newLocation\n}\nnode.warn(query);\nmsg.topic = query;\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 230,
-        "y": 440,
-        "wires": [
-            [
-                "205e407f67753cdd"
-            ]
-        ]
-    },
-    {
-        "id": "c45978f272c38c26",
-        "type": "function",
-        "z": "ceb078855481dd99",
-        "name": "Get ASN's",
-        "func": "let locationRecords = msg.payload;\nnode.warn(\"my warning\");\nnode.warn(locationRecords);\n\n// // Construct the update query using $set\n// let updateData = {\n//     set: {\n//         LPN: lpnRecords.LPN,\n//         binLocation: lpnRecords.binLocation,\n//         comment: lpnRecords.comment,\n//         movedLocation: lpnRecords.movedLocation,\n//         movement: lpnRecords.movement,\n//         operation: lpnRecords.operation,\n//         userId: lpnRecords.userId\n//     }\n// };\n\n// // Assuming you want to update the document based on the _id field\n// let query = { _id: lpnRecords._id };\n\n// // Construct the final update message\n// msg.payload = {\n//     query: query,\n//     update: updateData\n// };\n// node.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 590,
-        "y": 440,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "205e407f67753cdd",
-        "type": "mongodb in",
-        "z": "ceb078855481dd99",
-        "mongodb": "211349b719a1d604",
-        "name": "mongodb",
-        "collection": "lpns",
-        "operation": "find",
-        "x": 420,
-        "y": 440,
-        "wires": [
-            [
-                "c45978f272c38c26"
             ]
         ]
     }
