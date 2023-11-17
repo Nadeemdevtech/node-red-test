@@ -6079,7 +6079,7 @@
         "y": 1860,
         "wires": [
             [
-                "b385b10b6319370f"
+                "ae04191f78d5546f"
             ]
         ]
     },
@@ -6098,23 +6098,6 @@
         "x": 780,
         "y": 1860,
         "wires": []
-    },
-    {
-        "id": "a28572ab3156e62a",
-        "type": "function",
-        "z": "f7d9e8689641f632",
-        "name": "",
-        "func": "var data = msg.payload;\nvar operationType = data;\nif (operationType === 'insert') {\n  var msgData = {};\n  msgData.collection = 'AD_Port'; // Corrected the typo 'colection' to 'collection'\n  msgData.payload = { 'name': 'Nadeem', 'age': '23' }; // Corrected the data assignment and object structure\n\n  var alertMessage = 'New record inserted:\\n' + JSON.stringify(msgData.payload);\n\n  // You can customize this part to send alerts via other means, e.g., email, push notification, or any other mechanism.\n  // For demonstration, we're just logging the alert.\n  node.warn(alertMessage);\n\n  return msgData;\n}\n\n\n",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 340,
-        "y": 1860,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "5106dab008af45cf",
@@ -6427,9 +6410,7 @@
         "x": 342.33331298828125,
         "y": 1812.666748046875,
         "wires": [
-            [
-                "bce39eaa19dcc8dd"
-            ]
+            []
         ]
     },
     {
@@ -6532,7 +6513,7 @@
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
         "collection": "AD_Port",
-        "operation": "insert",
+        "operation": "find",
         "upsert": false,
         "multi": false,
         "x": 540,
@@ -6540,6 +6521,25 @@
         "wires": [
             [
                 "08e95244e0cbd9f8"
+            ]
+        ]
+    },
+    {
+        "id": "ae04191f78d5546f",
+        "type": "function",
+        "z": "f7d9e8689641f632",
+        "name": "",
+        "func": "let msgData = {};\nmsgData.colection = 'AD_Port';\nmsg.payload = {'name':'Nadeem'};\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1860,
+        "wires": [
+            [
+                "bce39eaa19dcc8dd"
             ]
         ]
     },
