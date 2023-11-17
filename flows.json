@@ -775,6 +775,11 @@
         "parallelism": "-1"
     },
     {
+        "id": "71a43e5e.2714d8",
+        "type": "mongodb2",
+        "name": ""
+    },
+    {
         "id": "133d0325e53716d3",
         "type": "function",
         "z": "b3edb4d5e13763dc",
@@ -13366,7 +13371,7 @@
         "y": 380,
         "wires": [
             [
-                "a0984d6929c72eba"
+                "1b785c79f2add276"
             ]
         ]
     },
@@ -13542,6 +13547,127 @@
         "wires": [
             [
                 "e4fe98311abe2589"
+            ]
+        ]
+    },
+    {
+        "id": "ae83ee32.03129",
+        "type": "inject",
+        "z": "ceb078855481dd99",
+        "name": "Simulate Putaway Operation",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "e9242283.540218"
+            ]
+        ]
+    },
+    {
+        "id": "e9242283.540218",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Generate MongoDB Document",
+        "func": "msg.payload = {\n    movedBinlocation: getRandomLocation(),\n    otherData: \"some value\"\n};\nreturn msg;\n\nfunction getRandomLocation() {\n    var locations = ['A1', 'B2', 'C3'];\n    return locations[Math.floor(Math.random() * locations.length)];\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 580,
+        "wires": [
+            [
+                "a7b8f53e.dd8fd8"
+            ]
+        ]
+    },
+    {
+        "id": "a7b8f53e.dd8fd8",
+        "type": "mongodb2 in",
+        "z": "ceb078855481dd99",
+        "service": "_ext_",
+        "configNode": "90b9e886c74f7cb0",
+        "name": "MongoDB",
+        "collection": "your_collection_name",
+        "operation": "",
+        "x": 680,
+        "y": 520,
+        "wires": [
+            [
+                "8224e5b0.b218c"
+            ]
+        ]
+    },
+    {
+        "id": "8224e5b0.b218c",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Check and Alert",
+        "func": "// Check if the movedBinlocation has changed\nvar currentLocation = msg.payload.movedBinlocation;\nvar previousLocation = flow.get(\"previousLocation\") || null;\n\nif (currentLocation && currentLocation !== previousLocation) {\n    // If changed, create an alert message\n    var alertMessage = 'ASN is moved to ' + currentLocation + ' location';\n    msg.payload = alertMessage;\n    flow.set(\"previousLocation\", currentLocation);\n    return msg;\n} else {\n    // If not changed, do nothing\n    return null;\n}",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 520,
+        "wires": [
+            [
+                "c880550d.2ed6a8"
+            ]
+        ]
+    },
+    {
+        "id": "c880550d.2ed6a8",
+        "type": "ui_toast",
+        "z": "ceb078855481dd99",
+        "position": "top-right",
+        "displayTime": "3",
+        "highlight": "",
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "",
+        "topic": "",
+        "name": "",
+        "x": 1120,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b785c79f2add276",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let lpnRecords = msg.payload;\nnode.warn('1111111' + lpnRecords);\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "a0984d6929c72eba"
             ]
         ]
     }
