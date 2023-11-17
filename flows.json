@@ -13359,7 +13359,7 @@
         "z": "ceb078855481dd99",
         "name": "Tracking ASN Location",
         "url": "/inbound/receiving",
-        "method": "put",
+        "method": "get",
         "upload": false,
         "swaggerDoc": "",
         "x": 220,
