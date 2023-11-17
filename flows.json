@@ -13657,7 +13657,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\nlet query = {\n    movedLocation: 'Binn'\n}\nmsg.topic = query;\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
+        "func": "let lpnRecords = msg.payload;\nlet newLocation = lpnRecords.movedLocation;\n\nlet query = {\n    movedLocation: newLocation\n}\nnode.warn(newLocation);\nmsg.topic = query;\nmsg.lpnRecords = lpnRecords;\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
