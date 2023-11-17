@@ -13524,5 +13524,25 @@
         "wires": [
             []
         ]
+    },
+    {
+        "id": "a737e82c49f6fe52",
+        "type": "comment",
+        "z": "ceb078855481dd99",
+        "name": "Verify ASN's",
+        "info": "",
+        "x": 190,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "1584c708a067e516",
+        "type": "comment",
+        "z": "ceb078855481dd99",
+        "name": "Tracking ASN Location",
+        "info": "",
+        "x": 220,
+        "y": 320,
+        "wires": []
     }
 ]
