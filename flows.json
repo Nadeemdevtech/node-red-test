@@ -13657,7 +13657,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\n\n// Construct the update query using $set\nlet updateData = {\n    $set: {\n        LPN: lpnRecords.LPN,\n        binLocation: lpnRecords.binLocation,\n        comment: lpnRecords.comment,\n        movedLocation: lpnRecords.movedLocation,\n        movement: lpnRecords.movement,\n        operation: lpnRecords.operation,\n        userId: lpnRecords.userId\n    }\n};\n\n// Assuming you want to update the document based on the _id field\nlet query = { _id: lpnRecords._id };\n\n// Construct the final update message\nmsg.payload = {\n    query: query,\n    update: updateData\n};\nnode.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
+        "func": "let lpnRecords = msg.payload;\n\n// Construct the update query using $set\nlet updateData = {\n    set: {\n        LPN: lpnRecords.LPN,\n        binLocation: lpnRecords.binLocation,\n        comment: lpnRecords.comment,\n        movedLocation: lpnRecords.movedLocation,\n        movement: lpnRecords.movement,\n        operation: lpnRecords.operation,\n        userId: lpnRecords.userId\n    }\n};\n\n// Assuming you want to update the document based on the _id field\nlet query = { _id: lpnRecords._id };\n\n// Construct the final update message\nmsg.payload = {\n    query: query,\n    update: updateData\n};\nnode.warn(\"my warning\"+JSON.stringify(msg.payload));\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
