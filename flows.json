@@ -13343,15 +13343,15 @@
         "z": "ceb078855481dd99",
         "mongodb": "92ae78283fc2fda1",
         "name": "MongoDB",
-        "collection": "AD_Port",
-        "operation": "insert",
+        "collection": "lpns",
+        "operation": "update",
         "upsert": false,
         "multi": false,
-        "x": 580,
+        "x": 360,
         "y": 380,
         "wires": [
             [
-                "3271df138dd62cd0"
+                "e4fe98311abe2589"
             ]
         ]
     },
@@ -13372,23 +13372,6 @@
         "wires": []
     },
     {
-        "id": "e4fe98311abe2589",
-        "type": "function",
-        "z": "ceb078855481dd99",
-        "name": "",
-        "func": "let msgData = msg.payload;\nnode.warn(\"my warning\"+JSON.stringify(msgData));\nreturn msg;",
-        "outputs": 1,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "65e4ae3976e23ee0",
         "type": "http in",
         "z": "ceb078855481dd99",
@@ -13401,7 +13384,7 @@
         "y": 380,
         "wires": [
             [
-                "e4fe98311abe2589"
+                "3266cbcae4079e57"
             ]
         ]
     },
@@ -13505,5 +13488,24 @@
         "x": 670,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "e4fe98311abe2589",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "",
+        "func": "var oldMovedBinLocation = flow.get(\"movedLocation\") || null; // Store the previous movedBinlocation in flow context\n\nif (msg.payload.operationType === \"update\") {\n    var updatedFields = msg.payload.updateDescription.updatedFields;\n\n    if (\n        \"movedlocation\" in updatedFields &&\n        updatedFields.movedBinlocation !== oldMovedBinLocation &&\n        (updatedFields.operation === \"putAwaye\" || updatedFields.operation === \"full movement\")\n    ) {\n        flow.set(\"movedLocation\", updatedFields.movedBinlocation); // Update the stored movedBinlocation\n        var alertMessage = `ASN is moved to ${updatedFields.movedBinlocation} movedLocation`;\n        msg.payload = alertMessage;\n        return msg; // Trigger the alert\n    }\n}\n\nreturn null; // No alert triggered\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 380,
+        "wires": [
+            [
+                "3271df138dd62cd0"
+            ]
+        ]
     }
 ]
