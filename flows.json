@@ -13657,7 +13657,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "Get ASN's",
-        "func": "let lpnRecords = msg.payload;\nnode.warn('1111111' +JSON.stringify(lpnRecords));\nreturn msg;",
+        "func": "let lpnRecords = msg.payload;\nlet updateData = {};\n updateData = {\n    $set: {\n        LPN : lpnRecords.LPN,\n        _id: lpnRecords._id,\n        binLocation: lpnRecords.binLocation,\n        comment: lpnRecords.comment,\n        movedLocation: lpnRecords.movedLocation,\n        movement: lpnRecords.movement,\n        operation: lpnRecords.operation,\n        userId: lpnRecords.userId\n    }\n};\n\nmsg.payload = updateData;\nreturn msg;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
