@@ -13338,24 +13338,6 @@
         "wires": []
     },
     {
-        "id": "3266cbcae4079e57",
-        "type": "mongodb-node",
-        "z": "ceb078855481dd99",
-        "mongodb": "92ae78283fc2fda1",
-        "name": "MongoDB",
-        "collection": "lpns",
-        "operation": "update",
-        "upsert": false,
-        "multi": false,
-        "x": 420,
-        "y": 380,
-        "wires": [
-            [
-                "e4fe98311abe2589"
-            ]
-        ]
-    },
-    {
         "id": "3271df138dd62cd0",
         "type": "debug",
         "z": "ceb078855481dd99",
@@ -13384,7 +13366,7 @@
         "y": 380,
         "wires": [
             [
-                "3266cbcae4079e57"
+                "a0984d6929c72eba"
             ]
         ]
     },
@@ -13544,5 +13526,23 @@
         "x": 220,
         "y": 320,
         "wires": []
+    },
+    {
+        "id": "a0984d6929c72eba",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "asns",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 440,
+        "y": 380,
+        "wires": [
+            [
+                "e4fe98311abe2589"
+            ]
+        ]
     }
 ]
