@@ -13531,22 +13531,6 @@
         "wires": []
     },
     {
-        "id": "a0984d6929c72eba",
-        "type": "mongodb-node",
-        "z": "ceb078855481dd99",
-        "mongodb": "92ae78283fc2fda1",
-        "name": "MongoDB",
-        "collection": "lpns",
-        "operation": "update",
-        "upsert": false,
-        "multi": false,
-        "x": 440,
-        "y": 380,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "1b785c79f2add276",
         "type": "function",
         "z": "ceb078855481dd99",
@@ -13569,6 +13553,7 @@
         "id": "c880550d.2ed6a8",
         "type": "ui_toast",
         "z": "ceb078855481dd99",
+        "d": true,
         "position": "top-right",
         "displayTime": "3",
         "highlight": "",
@@ -13587,6 +13572,7 @@
         "id": "8224e5b0.b218c",
         "type": "function",
         "z": "ceb078855481dd99",
+        "d": true,
         "name": "Check and Alert",
         "func": "// Check if the movedBinlocation has changed\nvar currentLocation = msg.payload.movedBinlocation;\nvar previousLocation = flow.get(\"previousLocation\") || null;\n\nif (currentLocation && currentLocation !== previousLocation) {\n    // If changed, create an alert message\n    var alertMessage = 'ASN is moved to ' + currentLocation + ' location';\n    msg.payload = alertMessage;\n    flow.set(\"previousLocation\", currentLocation);\n    return msg;\n} else {\n    // If not changed, do nothing\n    return null;\n}",
         "outputs": 1,
@@ -13606,6 +13592,7 @@
         "id": "ae83ee32.03129",
         "type": "inject",
         "z": "ceb078855481dd99",
+        "d": true,
         "name": "Simulate Putaway Operation",
         "props": [
             {
@@ -13635,6 +13622,7 @@
         "id": "e9242283.540218",
         "type": "function",
         "z": "ceb078855481dd99",
+        "d": true,
         "name": "Generate MongoDB Document",
         "func": "msg.payload = {\n    movedBinlocation: getRandomLocation(),\n    otherData: \"some value\"\n};\nreturn msg;\n\nfunction getRandomLocation() {\n    var locations = ['A1', 'B2', 'C3'];\n    return locations[Math.floor(Math.random() * locations.length)];\n}",
         "outputs": 1,
@@ -13654,6 +13642,7 @@
         "id": "a7b8f53e.dd8fd8",
         "type": "mongodb2 in",
         "z": "ceb078855481dd99",
+        "d": true,
         "service": "_ext_",
         "configNode": "90b9e886c74f7cb0",
         "name": "MongoDB",
@@ -13684,5 +13673,116 @@
                 "e4fe98311abe2589"
             ]
         ]
+    },
+    {
+        "id": "9c2a75f784a2d615",
+        "type": "debug",
+        "z": "ceb078855481dd99",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 880,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "c5d7345787e0b2d2",
+        "type": "http in",
+        "z": "ceb078855481dd99",
+        "name": "Verify ASN",
+        "url": "/asn_alert",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 180,
+        "y": 740,
+        "wires": [
+            [
+                "ccf0be686c48625c"
+            ]
+        ]
+    },
+    {
+        "id": "139885e016294aa7",
+        "type": "mongodb-node",
+        "z": "ceb078855481dd99",
+        "mongodb": "92ae78283fc2fda1",
+        "name": "MongoDB",
+        "collection": "asns",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 500,
+        "y": 740,
+        "wires": [
+            [
+                "b1196fe0617b4a21"
+            ]
+        ]
+    },
+    {
+        "id": "b1196fe0617b4a21",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "validate ASN",
+        "func": "let msgData1 = msg.receivingRecord;\nlet asnData = msg.payload; // Assuming msg.payload is already an object\n\n// Assuming 'asn' is the property you want to match\nlet matchingASN = null;\n\n// Loop through asnData array or object to find a matching ASN\nfor (let key in asnData) {\n    if (asnData.hasOwnProperty(key) && asnData[key].asn === msgData1.asn) {\n        matchingASN = key;\n        break;  // Exit the loop once a match is found\n    }\n}\n\n// Check if a matching ASN was found\nif (matchingASN !== null) {\n    // If a match is found, retrieve the 'createdAt' value from asnData\n    let matchedCreatedAt = new Date(asnData[matchingASN].createdAt).toISOString();\n    // Convert all createdAt values to ISO string format\n    let isoCreatedAtValues = Object.values(asnData).map(item => new Date(item.createdAt).toISOString());\n\n    // Check for other ASNs on the same day\n    let otherASNs = Object.values(asnData).filter(item => {\n        let itemCreatedAt = new Date(item.createdAt).toISOString();\n        return itemCreatedAt.startsWith(matchedCreatedAt.substr(0, 10)); // Compare only the date portion\n    });\n\n    // Check the status of other ASNs and show the list if status is open\n    let openASNs = otherASNs.filter(item => item.status === 'open');\n\n    // Get an array of ASN numbers with open status and earlier date\n    let openASNNodes = openASNs\n        .filter(openASN => new Date(openASN.createdAt).toISOString() < matchedCreatedAt)\n        .map(openASN => openASN.asn);\n\n    if (openASNNodes.length > 0) {\n        let response = {\n            Error: 'ASN is still in open status ' + openASNNodes.join(', ')\n        };\n        msg.payload = response;\n    } else {\n        // No open ASNs found, return an empty response\n        msg.payload = {};\n    }\n} else {\n    // No matching ASN found, return empty response\n    msg.payload = {};\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 720,
+        "wires": [
+            [
+                "9c2a75f784a2d615",
+                "49559ffcae261386"
+            ]
+        ]
+    },
+    {
+        "id": "ccf0be686c48625c",
+        "type": "function",
+        "z": "ceb078855481dd99",
+        "name": "Get ASN's",
+        "func": "let msgData = msg.req.body;\nmsg.receivingRecord = msgData;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 740,
+        "wires": [
+            [
+                "139885e016294aa7"
+            ]
+        ]
+    },
+    {
+        "id": "49559ffcae261386",
+        "type": "http response",
+        "z": "ceb078855481dd99",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 810,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "a3ee25e2b6de5170",
+        "type": "comment",
+        "z": "ceb078855481dd99",
+        "name": "Verify coldChain Chamber",
+        "info": "",
+        "x": 230,
+        "y": 680,
+        "wires": []
     }
 ]
