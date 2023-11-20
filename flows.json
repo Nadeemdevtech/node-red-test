@@ -13730,7 +13730,7 @@
         "type": "function",
         "z": "ceb078855481dd99",
         "name": "validate lpns",
-        "func": "let lpnsRecord = msg.receivingRecord;\nlet itemMasterRecords = msg.payload; // Assuming msg.payload is already an object\n\nnode.warn(lpnsRecord);\nnode.warn(itemMasterRecords);\n\nif(lpnsRecord.SKU === itemMasterRecords.SKU){\n    let itemMasterTemp = new Date(itemMasterRecords.TEMPERATURE).toISOString();\n    itemMasterTemp.startsWith(itemMasterTemp.substr(7, 10));\n    if (itemMasterTemp < '-20'){\n        node.warn(\"LPN in cold chamber\");\n    }else{\n        node.warn(\"LPN is not in cold chamber\");\n    }\n}else{\n    node.warn(\"LPN SKU Records doesn't found in item master\");\n}\nreturn msg;\n",
+        "func": "let lpnsRecord = msg.receivingRecord;\nlet itemMasterRecords = msg.payload; // Assuming msg.payload is already an object\n\nnode.warn(lpnsRecord);\nnode.warn(itemMasterRecords);\n\nif (lpnsRecord.SKU === itemMasterRecords.SKU) {\n    // Assuming itemMasterRecords.TEMPERATURE is a numerical value representing temperature\n\n    // Convert the temperature to a number (assuming it's a string or another type)\n    let itemMasterTemp = parseFloat(itemMasterRecords.TEMPERATURE);\n\n    if (!isNaN(itemMasterTemp) && itemMasterTemp < -20) {\n        node.warn(\"LPN in cold chamber\");\n    } else {\n        node.warn(\"LPN is not in cold chamber\");\n    }\n} else {\n    node.warn(\"LPN SKU Records doesn't found in item master\");\n}\n\nreturn msg;\n",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
