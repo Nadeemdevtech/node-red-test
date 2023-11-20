@@ -13695,7 +13695,7 @@
         "type": "http in",
         "z": "ceb078855481dd99",
         "name": "Verify ASN",
-        "url": "/asn_alert",
+        "url": "/lpn_alert",
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
